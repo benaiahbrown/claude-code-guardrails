@@ -538,6 +538,7 @@ gitleaks detect --source . --verbose
 git add .
 git commit -m "Initial secure project setup"
 # Expected: Detect secrets...Passed, gitleaks...Passed, commit goes through
+```
 
 ---
 
