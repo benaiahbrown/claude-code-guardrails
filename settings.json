@@ -1,0 +1,67 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/secrets/**)",
+      "Read(**/.aws/**)",
+      "Read(**/.ssh/**)",
+      "Read(**/id_rsa*)",
+      "Read(**/*_rsa)",
+      "Read(**/*_dsa)",
+      "Read(**/*_ed25519)",
+      "Read(**/*key*)",
+      "Read(**/*cert*)",
+      "Read(**/*token*)",
+      "Read(**/*secret*)",
+      "Read(**/*credential*)",
+      "Read(**/*password*)",
+      "Read(**/.git/**)",
+      "Read(**/.github/**)",
+      "Write(**/.env)",
+      "Write(**/.env.*)",
+      "Write(**/secrets/**)",
+      "Write(**/.aws/**)",
+      "Write(**/.ssh/**)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(rm -rf *)",
+      "Bash(git push*)",
+      "WebFetch(*)",
+      "WebSearch(*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/protect-files.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/validate-commands.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/run-safety-checks.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

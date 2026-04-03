@@ -1,0 +1,29 @@
+# Secrets and credentials
+.env
+.env.*
+secrets/
+*.key
+*.pem
+*.p12
+*.pfx
+*_rsa
+*_dsa
+*_ed25519
+*.cert
+*.crt
+
+# AWS and SSH
+.aws/
+.ssh/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# detect-secrets temp
+.secrets.baseline.tmp
+
+# OS
+.DS_Store
